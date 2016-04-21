@@ -1,0 +1,2 @@
+module SustainabilityLevelChecksHelper
+end

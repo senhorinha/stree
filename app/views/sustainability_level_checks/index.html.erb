@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Sustainability Level Checks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sustainability level</th>
+      <th>Edifice</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sustainability_level_checks.each do |sustainability_level_check| %>
+      <tr>
+        <td><%= sustainability_level_check.sustainability_level %></td>
+        <td><%= sustainability_level_check.edifice %></td>
+        <td><%= link_to 'Show', sustainability_level_check %></td>
+        <td><%= link_to 'Edit', edit_sustainability_level_check_path(sustainability_level_check) %></td>
+        <td><%= link_to 'Destroy', sustainability_level_check, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sustainability level check', new_sustainability_level_check_path %>

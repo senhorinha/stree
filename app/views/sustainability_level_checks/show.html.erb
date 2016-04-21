@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sustainability level:</strong>
+  <%= @sustainability_level_check.sustainability_level %>
+</p>
+
+<p>
+  <strong>Edifice:</strong>
+  <%= @sustainability_level_check.edifice %>
+</p>
+
+<%= link_to 'Edit', edit_sustainability_level_check_path(@sustainability_level_check) %> |
+<%= link_to 'Back', sustainability_level_checks_path %>
