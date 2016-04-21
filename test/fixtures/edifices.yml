@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  sustainability_level: 1
+  last_update_of_sustainability_level: 2016-04-21
+
+two:
+  name: MyString
+  sustainability_level: 1
+  last_update_of_sustainability_level: 2016-04-21

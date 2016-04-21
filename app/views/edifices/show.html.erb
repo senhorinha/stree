@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @edifice.name %>
+</p>
+
+<p>
+  <strong>Sustainability level:</strong>
+  <%= @edifice.sustainability_level %>
+</p>
+
+<p>
+  <strong>Last update of sustainability level:</strong>
+  <%= @edifice.last_update_of_sustainability_level %>
+</p>
+
+<%= link_to 'Edit', edit_edifice_path(@edifice) %> |
+<%= link_to 'Back', edifices_path %>

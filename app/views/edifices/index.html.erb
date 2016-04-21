@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Edifices</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Sustainability level</th>
+      <th>Last update of sustainability level</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @edifices.each do |edifice| %>
+      <tr>
+        <td><%= edifice.name %></td>
+        <td><%= edifice.sustainability_level %></td>
+        <td><%= edifice.last_update_of_sustainability_level %></td>
+        <td><%= link_to 'Show', edifice %></td>
+        <td><%= link_to 'Edit', edit_edifice_path(edifice) %></td>
+        <td><%= link_to 'Destroy', edifice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Edifice', new_edifice_path %>
