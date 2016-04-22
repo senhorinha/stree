@@ -9,9 +9,9 @@ scheduler.every '1m' do
   puts "done."
 end
 
-scheduler.every '2d' do
-  puts "Destroying Checks older than two days..."
-  SustainabilityLevelCheck.where('created_at < ?', 2.days.ago).each do |check|
+scheduler.every '20m' do
+  puts "Destroying Checks older than two minutes..."
+  SustainabilityLevelCheck.where('created_at < ?', 20.minutes.ago).each do |check|
     check.destroy
   end
   puts "done."
