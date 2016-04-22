@@ -7,7 +7,7 @@
          <div class="row">
            <div class="col-lg-12 col-md-12 col-sm-12">
              <h1 class="text-center">Sustainability Level Checker</h1>
-             <%= button_to "Check Sustainability", check_url, method: :post, :form => { :id => "check-button"}, class: "center-block btn btn-check" %>
+             <%= button_to "Check Sustainability", check_url, method: :get, :form => { :id => "check-button"}, class: "center-block btn btn-check" %>
              <h2 class="text-center">Results</h2>
              <% if @sustainability_level_checks %>
                <table class="table table-striped">
