@@ -4,21 +4,15 @@ class SustainabilityLevelChecksController < ApplicationController
     @sustainability_level_checks = SustainabilityLevelCheck.all
   end
 
-  # POST /sustainability_level_checks
-  # POST /sustainability_level_checks.json
-  def create
-    @sustainability_level_check = SustainabilityLevelCheck.new(sustainability_level_check_params)
-    SustainabilityLevelCheck.level = pick_random_level
+  def fetch_last_check
+    render json: SustainabilityLevelCheck.last, status: :ok
+  end
 
-    respond_to do |format|
-      if @sustainability_level_check.save
-        render :partial => 'sustainability_level_check', locals: { sustainability_level_check: @sustainability_level_check }
-        format.html { redirect_to @sustainability_level_check, notice: 'Sustainability level check was successfully created.' }
-        format.json { render :show, status: :created, location: @sustainability_level_check }
-      else
-        format.json { render json: @sustainability_level_check.errors, status: :unprocessable_entity }
-      end
-    end
+  def check
+    sustainability_level_check = SustainabilityLevelCheck.new({edifice_id: 1})
+    sustainability_level_check.level = pick_random_level
+    sustainability_level_check.save
+    render :partial => 'sustainability_level_check', locals: { sustainability_level_check: sustainability_level_check }
   end
 
   private
@@ -28,6 +22,6 @@ class SustainabilityLevelChecksController < ApplicationController
 
     def pick_random_level
       levels_size = SustainabilityLevelCheck.levels.size
-      SustainabilityLevelCheck.levels.values[rand(0..levels_size)]
+      SustainabilityLevelCheck.levels.values[rand(0..levels_size - 1)]
     end
 end

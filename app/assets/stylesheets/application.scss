@@ -1,0 +1,54 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+
+$button_color: #55703F;
+
+.copyright {
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  position: relative;
+  float: right;
+  line-height: 1;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 0;
+  color: #999;
+}
+
+.btn-check {
+  background-color: $button_color;
+  outline: none;
+  color: #fff;
+  font-size: 14px;
+  height: auto;
+  font-weight: normal;
+  padding: 14px 10px;
+  text-transform: uppercase;
+  border-color: lightness($button_color);
+}
+
+.btn-check:hover,
+.btn-check:focus {
+  color: #fff;
+  background-color: darken($button_color, 10);
+  border-color: darken($button_color, 12);
+}

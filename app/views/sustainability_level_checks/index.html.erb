@@ -1,29 +1,53 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = SustainabilityLevelCheck -%>
+<div class="container">
+ <div class="row">
+   <div class="col-md-6 col-md-offset-3">
+     <div class="panel panel-sustainability">
+       <div class="panel-body">
+         <div class="row">
+           <div class="col-lg-12 col-md-12 col-sm-12">
+             <h1 class="text-center">Sustainability Level Checker</h1>
+             <%= button_to "Check Sustainability", check_url, method: :post, :form => { :id => "check-button"}, class: "center-block btn btn-check" %>
+             <h2 class="text-center">Results</h2>
+             <% if @sustainability_level_checks %>
+               <table class="table table-striped">
+                 <thead>
+                   <tr>
+                     <th>Date of Check</th>
+                     <th>Sustainability Level</th>
+                   </tr>
+                  </thead>
+                  <tbody id="result-list">
+                    <%if @sustainability_level_checks.empty? %>
+                        <td id="no-results" colspan="3">There is no past results</td>
+                    <% end %>
+                    <%= render partial: "sustainability_level_check", collection: @sustainability_level_checks %>
+                  </tbody>
+                </table>
+              <% end %>
+              <p class="copyright">
+                2016 @ <a href="mailto:thiago.senhorinha@gmail.com" target="_blank">Thiago Senhorinha</a> and Ítalo Alberto | All rights Reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<h1>Listing Sustainability Level Checks</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Sustainability level</th>
-      <th>Edifice</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @sustainability_level_checks.each do |sustainability_level_check| %>
-      <tr>
-        <td><%= sustainability_level_check.sustainability_level %></td>
-        <td><%= sustainability_level_check.edifice %></td>
-        <td><%= link_to 'Show', sustainability_level_check %></td>
-        <td><%= link_to 'Edit', edit_sustainability_level_check_path(sustainability_level_check) %></td>
-        <td><%= link_to 'Destroy', sustainability_level_check, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Sustainability level check', new_sustainability_level_check_path %>
+<script type="text/javascript">
+  $("#check-button").on("click", function(){
+    var dataSet = $(this).serialize();
+    $.ajax({
+        type: "POST",
+        url: "/check",
+        data: dataSet,
+        success: function(data){
+          $('#no-results').remove();
+          $('#result-list').prepend(data)
+        }
+    });
+    return false;
+  });
+</script>
