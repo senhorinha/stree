@@ -1,7 +1,7 @@
 class SustainabilityLevelChecksController < ApplicationController
 
   def index
-    @sustainability_level_checks = SustainabilityLevelCheck.all
+    @sustainability_level_checks = SustainabilityLevelCheck.order(created_at: "desc")
   end
 
   def fetch_last_check
@@ -9,10 +9,7 @@ class SustainabilityLevelChecksController < ApplicationController
   end
 
   def check
-    sustainability_level_check = SustainabilityLevelCheck.new({edifice_id: 1})
-    sustainability_level_check.level = pick_random_level
-    sustainability_level_check.save
-    render :partial => 'sustainability_level_check', locals: { sustainability_level_check: sustainability_level_check }
+    render :partial => 'sustainability_level_check', locals: { sustainability_level_check: SustainabilityLevelCheck.create({edifice_id: 1, level: pick_random_level})}
   end
 
   private
