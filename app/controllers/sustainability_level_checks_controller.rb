@@ -1,3 +1,6 @@
+require 'sustainability_fuzzylogic_manager'
+require 'fuzzy_logic_level_converter'
+
 class SustainabilityLevelChecksController < ApplicationController
 
   def index
@@ -9,16 +12,14 @@ class SustainabilityLevelChecksController < ApplicationController
   end
 
   def check
-    render :partial => 'sustainability_level_check', locals: { sustainability_level_check: SustainabilityLevelCheck.create({edifice_id: 1, level: pick_random_level})}
+    fuzzy_result = SustainabilityFuzzyLogicManager.read_random_line_of_csv
+    sustainability_level = FuzzyLogicLevelConverter.convert_to_sustainability_level fuzzy_result
+    render :partial => 'sustainability_level_check', locals: { sustainability_level_check: SustainabilityLevelCheck.create({edifice_id: 1, level: sustainability_level})}
   end
 
   private
-    def sustainability_level_check_params
-      params.require(:sustainability_level_check).permit(:edifice_id)
-    end
+  def sustainability_level_check_params
+    params.require(:sustainability_level_check).permit(:edifice_id)
+  end
 
-    def pick_random_level
-      levels_size = SustainabilityLevelCheck.levels.size
-      SustainabilityLevelCheck.levels.values[rand(0..levels_size - 1)]
-    end
 end

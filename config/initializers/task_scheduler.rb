@@ -1,11 +1,13 @@
 require 'rufus/scheduler'
+require 'sustainability_fuzzylogic_manager'
+require 'fuzzy_logic_level_converter'
 scheduler = Rufus::Scheduler.new
 
 scheduler.every '1m' do
   puts "Checking Sustainability Level..."
-  levels_size = SustainabilityLevelCheck.levels.size
-  level = SustainabilityLevelCheck.levels.values[rand(0..levels_size - 1)]
-  SustainabilityLevelCheck.create({edifice_id: 1, level: level})
+  fuzzy_result = SustainabilityFuzzyLogicManager.read_random_line_of_csv
+  sustainability_level = FuzzyLogicLevelConverter.convert_to_sustainability_level fuzzy_result
+  SustainabilityLevelCheck.create({edifice_id: 1, level: sustainability_level})
   puts "done."
 end
 

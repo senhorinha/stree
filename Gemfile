@@ -16,6 +16,7 @@ gem 'autoprefixer-rails'
 gem "font-awesome-rails"
 
 gem "rufus-scheduler"
+gem "pry"
 
 group :development, :test do
   gem 'byebug'
